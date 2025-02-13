@@ -24,6 +24,9 @@ public class VendingMachine {
 		float priceBeefjerky = 9.29f;
 		float priceSwedishfish = 0.50f;
 
+		System.out.println("Welcome! Please type in what you want to buy.");
+		System.out.println(String.format("Our options are: %s\n %s\n %s\n %s\n %s\n %s\n %s\n %s\n %s\n %s\n", "Snickers", "Sour Patch Kids", "Lays Original", "Doritos", 
+		"Cookies", "Strawberry Poptarts", "Granola Bar", "Chex Mix", "Beef Jerky", "Swedish Fish"));
 
 		
 	}
