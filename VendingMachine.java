@@ -9,9 +9,13 @@ public class VendingMachine {
 
 		boolean userDone = false;
 
+		boolean insertAmount = false;
+
 		String snackName = "";
 
 		double total = 0.0;
+
+		double userMoney = 0.0;
 
 		double priceSnickers = 1.29d;
 		double priceSourPatchKids = 1.89d;
@@ -29,6 +33,8 @@ public class VendingMachine {
 		"Snickers", priceSnickers, "Sour Patch Kids", priceSourPatchKids, "Lays Original", priceLaysOriginal, "Doritos", priceDoritos, 
 		"Cookies", priceCookies, "Strawberry Poptarts", priceStrawberryPoptart, "Granola Bar", priceGranolaBar, "Chex Mix", priceChexMix, "Beef Jerky", priceBeefJerky, 
 		"Swedish Fish", priceSwedishFish));
+
+		
 
 
 		while (!userDone) {
@@ -96,13 +102,55 @@ public class VendingMachine {
 					break;
 
 				default:
-					System.out.println("Please print the snack's name.");
-					System.out.println("Which snack would you like to buy?");
-					snackName = userInput.nextLine().toUpperCase();
+					
+			}
+
+			// Accepts money from the user 
+			System.out.println( snackName  +  "is " +  total);
+		while(!insertAmount){
+			System.out.println("Insert amount('confrim')");
+
+			String input = userInput.nextLine();
+			if(input.equalsIgnoreCase("Confirm")){ //Press or type  confirm when the user is done inserting amount
+				break;
+			
+			}try{
+				int amount = Integer.parseInt(input);
+				if(amount > 0 && amount%1 == 0 ){
+					userMoney +=amount;
+					System.out.println("Current balance: $" + userMoney);
+				} else {
+					System.out.println("Only $1 bills are accepted.");
+				}
+			}catch (NumberFormatException e){
+				System.out.println("Invalid input. Please insert only $1 bills.");
+			}
+		
+
+		}
+
+			//Confirms the purchase 
+			System.out.println("Confirm purchase?(Yes/No):");
+			String confirm = userInput.nextLine();
+
+			if(confirm.equalsIgnoreCase("no")){
+				System.out.println("Transaction canceled. Amount refunded: $" + userMoney);
+			} else if(userMoney >= total){
+				
+			    userMoney -= total;
+				System.out.println("Thank you for your purchase! " + snackName + ".");
+
+				if(userMoney > 0){
+					System.out.println("Your balance is: $" + userMoney);
+				} else {
+					System.out.println("Insufficient funds. Transaction canceled. Amount refunded: $" + userMoney);
+				}
+
 			}
 
 		}
 		userInput.close();
-		System.out.println("Your total is: $" + total);
+		System.out.println("Enjoy your snack! Have a great day!!!");
+		//System.out.println("Your total is: $" + total);
 	}
 }
